@@ -25,7 +25,7 @@ class ApiController extends Controller
     public function __construct()
     {
         $this->storename = 'db.json';
-        $this->expiration_time = 1;
+        $this->expiration_time = 5;
         $this->filter_storage();
     }
 
@@ -100,7 +100,7 @@ class ApiController extends Controller
         $pre_values = $this->get_values();
         $updatedData = array_merge($pre_values, $current_input); //merge array with prev values
         Storage::put($this->storename, json_encode($updatedData)); //update storage values
-        return response()->json($current_input, 201);
+        return response()->json($current_input, 200);
     }
 
     /**
