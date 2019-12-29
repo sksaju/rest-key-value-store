@@ -111,7 +111,6 @@ class Store
      */
     public function filter_values()
     {
-        $filter_values = [];
         $current_time = time();
         $values = $this->storevalues;
         if (!empty($values)) {
@@ -120,7 +119,8 @@ class Store
                 $difference = $difference / 60; //difference in minutes
                 return ($difference < $this->expiration_time);
             }, ARRAY_FILTER_USE_BOTH);
+            //Save the filtered values
+            $this->save($filter_values);
         }
-        $this->save($filter_values);
     }
 }
