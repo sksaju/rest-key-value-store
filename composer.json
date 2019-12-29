@@ -60,9 +60,8 @@
         ],
         "start": [
             "@composer install",
-            "@php artisan key:generate --ansi",
             "@php artisan serve",
-            "phpunit"
+            "@php artisan schedule:run"
         ]
     }
 }

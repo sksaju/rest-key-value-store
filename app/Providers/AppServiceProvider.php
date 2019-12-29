@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('App\Libraries\Store', function ($app) {
+            return new \App\Libraries\Store();
+        });
     }
 
     /**
