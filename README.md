@@ -24,7 +24,7 @@ Click [here](https://github.com/sksaju/rest-key-value-store/archive/master.zip) 
 For using the ProcessStore scheduler, you only need to add the following Cron entry to your server.
 
 ```
-* * * * * cd /path-to-the-project && php artisan schedule:run >> /dev/null 2>&1
+> * * * * * cd /path-to-the-project && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 

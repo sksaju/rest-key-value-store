@@ -99,7 +99,7 @@ class Store
             $values = Storage::get($storename);
             $values = json_decode($values, true);
         } else {
-            Storage::put($storename, $values);
+            Storage::put($storename, json_encode($values));
         }
         $this->storevalues = $values;
     }
