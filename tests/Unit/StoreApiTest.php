@@ -41,7 +41,6 @@ class StoreApiTest extends TestCase
                 ->assertJsonCount(count($values));
     }
 
-
     /**
      * Basic functional test of update values.
      *
