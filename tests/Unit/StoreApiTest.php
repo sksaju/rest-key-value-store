@@ -4,20 +4,11 @@ namespace Tests\Unit;
 
 use Faker\Factory;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StoreApiTest extends TestCase
 {
-
-    /**
-     * Create a new instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->faker = Factory::create();
-    }
-
     /**
      * Basic functional test of save values.
      *
@@ -25,8 +16,9 @@ class StoreApiTest extends TestCase
      */
     public function testSaveValue()
     {
+        $faker = Factory::create();
         $data = [
-            $this->faker->name => $this->faker->sentence,
+            $faker->name => $faker->sentence,
         ];
         $response = $this->json('POST', '/api/values', $data);
         $response

@@ -27,6 +27,11 @@ For using the ProcessStore scheduler, you only need to add the following Cron en
 > * * * * * cd /full-project-path && php artisan schedule:run >> /dev/null 2>&1
 ```
 
+#### for Testing APIs
+```
+> vendor/bin/phpunit
+```
+
 
 ### PROJECT APIs
 
