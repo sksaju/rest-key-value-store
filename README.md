@@ -28,7 +28,7 @@ For using the ProcessStore scheduler, you only need to add the following Cron en
 ```
 
 
-### TEST CASE
+### PROJECT APIs
 
 #### GET /api/values
 Get all the values of the store.

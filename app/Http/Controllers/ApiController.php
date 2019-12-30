@@ -16,7 +16,11 @@ class ApiController extends Controller
     public function index(Request $request)
     {
         $keys = $request->query('keys');
-        $response = Store::get($keys);
+        $values = Store::get($keys);
+        $response = array();
+        foreach ($values as $key => $value) {
+            $response[$key] = $value['value'];
+        }
         return response()->json($response, 200);
     }
 
@@ -29,6 +33,7 @@ class ApiController extends Controller
     public function store(Request $request)
     {
         $errors = array();
+        $saveData = array();
         $current_time = time();
         $values = Store::get();
         $inputs = $request->all();
@@ -37,7 +42,7 @@ class ApiController extends Controller
                 array_push($errors, $key . ' already exists');
                 continue;
             }
-            $inputs[$key] = array(
+            $saveData[$key] = array(
                 'value' => $value,
                 'created_at' => $current_time
             );
@@ -45,7 +50,8 @@ class ApiController extends Controller
         if (!empty($errors)) {
             return response()->json($errors, 400);
         }
-        $updatedData = array_merge($values, $inputs); //merge array with prev values
+        
+        $updatedData = array_merge($values, $saveData); //merge array with prev values
         Store::save($updatedData);
         return response()->json($inputs, 201);
     }
@@ -60,13 +66,14 @@ class ApiController extends Controller
     public function update(Request $request)
     {
         $current_time = time();
+        $inputs = $request->all();
         $current_input = array_map(function ($value) use ($current_time) {
             return ['value' => $value, 'created_at' => $current_time];
-        }, $request->all());
+        }, $inputs);
 
         $pre_values = Store::get();
         $updatedData = array_merge($pre_values, $current_input); //merge array with prev values
         Store::save($updatedData);
-        return response()->json($current_input, 200);
+        return response()->json($inputs, 200);
     }
 }

@@ -41,14 +41,9 @@ class Store
      */
     public function get($keys=null)
     {
-        $data = array();
+        $data = $this->storevalues;
         if (!empty($keys)) {
             $data = $this->value_by_keys($keys);
-        } else {
-            $values = $this->storevalues;
-            foreach ($values as $key => $value) {
-                $data[$key] = $value['value'];
-            }
         }
         return $data;
     }
@@ -72,18 +67,16 @@ class Store
      */
     public function value_by_keys($keys)
     {
-        $data = array();
         $current_time = time();
         $values = $this->storevalues;
         $keys_array = explode(',', $keys);
         foreach ($values as $key => $value) {
             if (in_array($key, $keys_array)) {
-                $data[$key] = $value['value'];
                 $values[$key]['created_at'] = $current_time;
             }
         }
         $this->save($values);
-        return $data;
+        return $values;
     }
 
     /**
