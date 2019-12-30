@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Faker\Factory;
 use Tests\TestCase;
+use Facades\App\Libraries\Store;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -33,8 +34,11 @@ class StoreApiTest extends TestCase
      */
     public function testGetValue()
     {
+        $values = Store::get();
         $response = $this->json('GET', '/api/values');
-        $response->assertStatus(200);
+        $response
+                ->assertStatus(200)
+                ->assertJsonCount(count($values));
     }
 
 
