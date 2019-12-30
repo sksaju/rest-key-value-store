@@ -19,7 +19,7 @@ class StoreApiTest extends TestCase
     {
         $faker = Factory::create();
         $data = [
-            $faker->name => $faker->sentence,
+            $faker->unixTime => $faker->sentence,
         ];
         $response = $this->json('POST', '/api/values', $data);
         $response
