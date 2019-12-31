@@ -33,16 +33,16 @@ class ApiController extends Controller
     public function store(Request $request)
     {
         $errors = array();
-        $new_data = array();
         $current_time = time();
         $values = Store::get();
+        $new_values = array();
         $inputs = $request->all();
         foreach ($inputs as $key => $value) {
             if (array_key_exists($key, $values)) {
                 array_push($errors, $key . ' already exists');
                 continue;
             }
-            $data[$key] = array(
+            $new_values[$key] = array(
                 'value' => $value,
                 'created_at' => $current_time
             );
@@ -51,7 +51,7 @@ class ApiController extends Controller
             return response()->json($errors, 400);
         }
         
-        $updated_data = array_merge($values, $new_data); //merge array with prev values
+        $updated_data = array_merge($values, $new_values); //merge new values with prev values
         Store::save($updated_data);
         return response()->json($inputs, 201);
     }
