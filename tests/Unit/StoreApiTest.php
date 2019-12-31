@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use Faker\Factory;
 use Tests\TestCase;
 use Facades\App\Libraries\Store;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class StoreApiTest extends TestCase
 {
