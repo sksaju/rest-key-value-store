@@ -67,16 +67,18 @@ class Store
      */
     public function value_by_keys($keys)
     {
+        $data = array();
         $current_time = time();
         $values = $this->storevalues;
         $keys_array = explode(',', $keys);
         foreach ($values as $key => $value) {
             if (in_array($key, $keys_array)) {
                 $values[$key]['created_at'] = $current_time;
+                $data[$key] = $value;
             }
         }
         $this->save($values);
-        return $values;
+        return $data;
     }
 
     /**
